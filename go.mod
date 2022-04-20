@@ -1,4 +1,5 @@
-module gotree
+module github.com/ElementakGod/gotree
+
 
 go 1.17
 

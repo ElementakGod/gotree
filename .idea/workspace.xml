@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca3f9895-f2e8-4d87-bd91-9b81cfa5e40a" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-    </list>
+    <list default="true" id="ca3f9895-f2e8-4d87-bd91-9b81cfa5e40a" name="Changes" comment="fix module name" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +73,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="fix module name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix module name" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

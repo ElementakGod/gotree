@@ -1,6 +1,6 @@
 package main
 
-import "gotree/cmd"
+import "github.com/ElementakGod/gotree/cmd"
 
 func main() {
 	cmd.Execute()

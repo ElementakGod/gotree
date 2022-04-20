@@ -1,8 +1,8 @@
 package cmd
 
 import (
+	"github.com/ElementakGod/gotree/pkg"
 	"github.com/spf13/cobra"
-	"gotree/pkg"
 )
 
 var name, path string

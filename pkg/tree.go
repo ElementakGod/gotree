@@ -33,16 +33,17 @@ var projectCatalogSlice = [...]string{Cmd, Pkg, Internal, Api, Web, Configs, Ini
 type ProjectTree struct {
 	ProjectName string // 项目名
 	ProjectPath string // 项目路径，如果为空 则为当前路径
+	SubDir      bool   // 仅创建二级目录
 }
 
-func NewProjectTree(name, path string) *ProjectTree {
+func NewProjectTree(name, path string, subDir bool) *ProjectTree {
 	var fPath string
 	if path == "" {
 		fPath = name
 	} else {
 		fPath = fmt.Sprintf("%s/%s", path, name)
 	}
-	return &ProjectTree{ProjectName: name, ProjectPath: fPath}
+	return &ProjectTree{ProjectName: name, ProjectPath: fPath, SubDir: subDir}
 }
 
 // Setup
@@ -66,14 +67,23 @@ func (p *ProjectTree) Setup() error {
 // @receiver p
 // @return error
 func (p *ProjectTree) createFileCatalog() error {
-	err := os.Mkdir(p.ProjectPath, os.ModePerm)
-	if err != nil {
-		return err
-	}
-	for _, tmp := range projectCatalogSlice {
-		err = os.Mkdir(fmt.Sprintf("%s/%s", p.ProjectPath, tmp), os.ModePerm)
+	if !p.SubDir {
+		err := os.Mkdir(p.ProjectPath, os.ModePerm)
 		if err != nil {
 			return err
+		}
+		for _, tmp := range projectCatalogSlice {
+			err = os.Mkdir(fmt.Sprintf("%s/%s", p.ProjectPath, tmp), os.ModePerm)
+			if err != nil {
+				return err
+			}
+		}
+	} else {
+		for _, tmp := range projectCatalogSlice {
+			err := os.Mkdir(tmp, os.ModePerm)
+			if err != nil {
+				return err
+			}
 		}
 	}
 	return nil
@@ -84,9 +94,11 @@ func (p *ProjectTree) createFileCatalog() error {
 // @receiver p
 // @return error
 func (p *ProjectTree) createMod() error {
-	err := os.Chdir(p.ProjectPath)
-	if err != nil {
-		return err
+	if !p.SubDir {
+		err := os.Chdir(p.ProjectPath)
+		if err != nil {
+			return err
+		}
 	}
 
 	f, err := os.Create("go.mod")
